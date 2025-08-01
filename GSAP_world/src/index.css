@@ -73,16 +73,16 @@ body {
             @apply flex md:flex-row flex-col md:justify-between items-center gap-5 py-5 lg:px-0 px-5 container mx-auto;
         }
 
-        p {
-            @apply font-modern-negra text-3xl -mb-2;
+        a {
+            @apply cursor-pointer text-nowrap md:text-base text-sm pl-0;
         }
 
-        a {
-            @apply cursor-pointer text-nowrap md:text-base text-sm;
+        p {
+            @apply font-modern-negra text-xl -mb-2;
         }
 
         ul {
-            @apply flex-center lg:gap-12 gap-7;
+            @apply flex-center lg:gap-10 gap-20 py-5;
         }
     }
 
