@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import Home from './components/pages/Home.jsx';
 import About from './components/pages/About.jsx';
 import Galleries from './components/pages/Galleries.jsx';
+import GalleryDetail from './components/pages/GalleryDetail.jsx';
 import Contact from './components/pages/Contact.jsx';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/galleries" element={<Galleries />} />
+          <Route path="/galleries/:slug" element={<GalleryDetail />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

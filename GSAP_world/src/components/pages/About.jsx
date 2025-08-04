@@ -5,24 +5,32 @@ const About = () => {
   const imageRef = useRef();
   const titleRef = useRef();
   const textContainerRef = useRef();
+  const cameraZoomRef = useRef();
 
   useEffect(() => {
     // Initialize the timeline
     const timeline = gsap.timeline();
 
     // Make sure the elements are available before animating
-    if (!titleRef.current || !imageRef.current || !textContainerRef.current) {
+    if (!titleRef.current || !imageRef.current || !textContainerRef.current || !cameraZoomRef.current) {
       console.error('Some refs are not available for animation');
       return;
     }
 
-    // Scale the mask to reveal the about_me image
+    // Scale both the camera_zoom.png and the mask simultaneously
     timeline
-      .to('.masked-img', {
+      .to(['.masked-img'], {
         maskSize: '400%',
         duration: 2,
         ease: 'power3.inOut',
       })
+      // Scale camera_zoom.png much bigger and fade it out
+      .to(cameraZoomRef.current, {
+        scale: 8, // Scale it much bigger
+        opacity: 0.2, // Fade out
+        duration: 2,
+        ease: 'power3.inOut',
+      }, '-=2') // Run simultaneously with the mask scaling
       // Reveal the title at the top
       .to(titleRef.current, {
         opacity: 1,
@@ -47,17 +55,33 @@ const About = () => {
 
   return (
     <section id="about" className="min-h-screen relative">
+      {/* Background camera zoom image - increased initial size */}
+      <div 
+        ref={cameraZoomRef} 
+        className="absolute inset-0 flex justify-center items-center pt-24"
+        style={{ zIndex: 1 }}
+      >
+        <img
+          src="/images/camera_zoom.png"
+          className="w-3/4 md:w-1/2 lg:w-2/5 object-contain" // Increased initial size
+        />
+      </div>
+
       {/* Title that appears at the top - reduced top padding but increased bottom padding */}
       <div 
         ref={titleRef} 
         className="container mx-auto pt-16 pb-16 opacity-0" 
-        style={{ transform: 'translateY(-30px)' }}
+        style={{ transform: 'translateY(-30px)', zIndex: 3 }}
       >
         <h1 className="about-title text-5xl md:text-8xl font-modern-negra text-center">About Me</h1>
       </div>
 
       {/* Image with cut-out - smaller version */}
-      <div ref={imageRef} className='about-me-image absolute inset-0 flex justify-center items-center pt-24'>
+      <div 
+        ref={imageRef} 
+        className='about-me-image absolute inset-0 flex justify-center items-center pt-24'
+        style={{ zIndex: 2 }}
+      >
         <img
           src="/images/about_me.png"
           className="masked-img w-1/2 md:w-1/3 lg:w-1/4 object-contain rounded-lg shadow-lg"
@@ -68,7 +92,7 @@ const About = () => {
       <div 
         ref={textContainerRef} 
         className="container mx-auto py-6 opacity-0 absolute left-10 top-1/3 max-w-md mt-10"
-        style={{ transform: 'translateX(-30px)' }}
+        style={{ transform: 'translateX(-30px)', zIndex: 3 }}
       >
         <h2 className="text-3xl mb-5 font-modern-negra">My Journey</h2>
         <p className="text-xl mb-4">
