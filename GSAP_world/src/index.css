@@ -55,10 +55,10 @@ body {
 }
 
 @utility masked-img {
-    mask-image: url("/images/mask-img.png");
+    mask-image: url("/images/circle_mask.png");
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-size: 50%;
+    mask-size: 5%;
 }
 
 @layer components {
