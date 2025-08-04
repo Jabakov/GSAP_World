@@ -1,9 +1,13 @@
 import React from 'react';
 import { navLinks } from '../../constants/index.js';
+import { Link } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
 import gsap from 'gsap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCameraRetro } from '@fortawesome/free-solid-svg-icons'
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
     useGSAP(() => {
@@ -25,16 +29,17 @@ const Navbar = () => {
     return (
         <nav>
             <div>
-                <a href="#home" className="flex items-center gap-2">
+                <Link to="/" className="flex items-center gap-2">
                     <FontAwesomeIcon icon={faCameraRetro} size="2x" />
-                    <p>Ana's Pics</p> 
-                    {/* LET ANA CHANGE NAME BASED ON PREFERENCE */}
-                </a>
+                    <p>Ana's Pics</p>
+                </Link>
 
                 <ul>
                     {navLinks.map((link) => (
                        <li key={link.id}>
-                            <a href={`#${link.id}`}>{link.title}</a>
+                            <Link to={`/${link.id === 'home' ? '' : link.id}`}>
+                                {link.title}
+                            </Link>
                        </li> 
                     ))}
                 </ul>

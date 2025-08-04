@@ -99,6 +99,7 @@ const Hero = () => {
                 src="/videos/WorldFlyover.mp4"
                 muted
                 playsInline
+                autoPlay
                 preload="auto"
                 />
             </div>

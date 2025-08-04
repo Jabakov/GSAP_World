@@ -74,7 +74,7 @@ body {
         }
 
         a {
-            @apply cursor-pointer text-nowrap md:text-base text-sm pl-0;
+            @apply cursor-pointer text-nowrap md:text-base text-sm pl-0 transition-colors duration-200 hover:text-yellow;
         }
 
         p {
